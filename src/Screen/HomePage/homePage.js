@@ -1,11 +1,12 @@
 import React, { Component } from "react";
-import { Text, TouchableOpacity, View,Image} from "react-native";
+import { Text, TouchableOpacity, View,Image , StyleSheet} from "react-native";
 import navigationStrings from "../../constants/navigationStrings";
 
 
 import imagePath from "../../assets/images/imagePath"
 import * as ImagePicker from 'react-native-image-picker';
 import apis from "../../apis";
+import { userContext } from "../../context/context";
 
 
 
@@ -19,6 +20,7 @@ export default class  LandingPage extends Component{
             image: {uri:'https://www.hayalanka.com/wp-content/uploads/2017/07/avtar-image.jpg'},
         }
     }
+    static contextType=userContext;
 
 
     // chooseImage = () => {
@@ -117,17 +119,22 @@ export default class  LandingPage extends Component{
         return(
 
             <View>
-                <TouchableOpacity onPress={()=>this.props.navigation.navigate('Login')}>
+                {/* <TouchableOpacity onPress={()=>this.props.navigation.navigate('Login')}> */}
 
-                <Text>Home Page</Text>
-                </TouchableOpacity>
-
-
+                <Text style={styles.homePage}>Home Page</Text>
+                {/* </TouchableOpacity> */}
 
 
-                <TouchableOpacity  onPress={this.chooseImageFromGallery}>
+
+
+                <TouchableOpacity  onPress={this.chooseImageFromGallery} style={styles.imageChoose}>
                         <Image source={this.state.image}
                             style={{ width: 120, height: 120 }} />
+
+                    </TouchableOpacity>
+
+                    <TouchableOpacity style={styles.logOut} onPress={this.context.onLogout}>
+                        <Text style={styles.logOutText}>Log Out !!</Text>
 
                     </TouchableOpacity>
 
@@ -136,3 +143,31 @@ export default class  LandingPage extends Component{
         )
     }
 }
+const styles= StyleSheet.create({
+    homePage:{
+        fontSize:25,
+        textAlign:"center",
+        marginTop:5,
+        marginBottom:10
+    },
+    imageChoose:{
+        marginLeft:'auto',
+        marginRight:'auto',
+
+    },
+    logOut:{
+        backgroundColor:"#b23b3b",
+        paddingTop:10,
+        paddingBottom:10,
+        width:300,
+        marginLeft:'auto',
+        marginRight:'auto',
+        marginTop:350
+        
+    },
+    logOutText:{
+        textAlign:"center",
+        color:'white',
+        fontSize:20
+    }
+})

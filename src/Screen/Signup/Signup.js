@@ -13,6 +13,7 @@ import validations from "../../utils/validations";
 import apis from "../../apis";
 import Loader from "../../Component/Loader";
 import navigationStrings from "../../constants/navigationStrings";
+// import { userContext } from "../../context/context";
 
 
 
@@ -146,6 +147,7 @@ export default class Signup extends Component {
                    
                         console.log(response)
                         this.props.navigation.navigate("Login")
+                        // this.context.onLogin();
                         this.setState({
                             isvalid: false
                         })

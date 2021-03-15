@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Text, View, TouchableOpacity , StyleSheet,Image  } from 'react-native';
+import {Text, View, TouchableOpacity , StyleSheet,Image , ActivityIndicator  } from 'react-native';
 import imagePath from '../../assets/images/imagePath';
 import Loader from '../../Component/Loader';
 import TextInputComponent from '../../Component/TextaInputComponent'
@@ -7,6 +7,7 @@ import navigationStrings from '../../constants/navigationStrings';
 import { showMessage, hideMessage } from "react-native-flash-message";
 import validations from "../../utils/validations";
 import apis from "../../apis";
+import { userContext } from '../../context/context';
 
 
 export default class Login extends Component {
@@ -18,6 +19,7 @@ export default class Login extends Component {
         isvalid:""
     };
   }
+  static contextType=userContext;
 
 
   
@@ -70,14 +72,24 @@ checkData = () => {
         apis.login({ email, password })
             .then(response => {
                
-                    console.log(response)
-                    this.props.navigation.navigate("LandingPage")
-                    this.setState({
-                        isvalid: false
+                    // console.log(response)
+                    // this.props.navigation.navigate("LandingPage")
+                    // 
+                    this.context.onLogin();
+                    showMessage({
+                        type:"success",
+                        message:"Login done successfully "
                     })
+                    this.setState({
+                            isvalid: false
+                        })
                     
             }).catch((error) => {
                 this.setState({ isvalid: false }),
+                showMessage({
+                    type:"danger",
+                    message:"Login failed "
+                })
                 
                     console.log(error)
             })
@@ -87,7 +99,7 @@ checkData = () => {
 
 
   render() {
-      const{isValidate, isvalid} =this.state
+      const{isvalid} =this.state
     return (
       <View style={styles.container}>
         {/* <TouchableOpacity

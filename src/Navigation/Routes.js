@@ -1,8 +1,11 @@
-import React from 'react';
+import React ,{useContext} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import AuthStack from './AuthStack';
 import MainStack from './MainStack';
+import { userContext } from '../context/context';
+
+
 
 const Stack = createStackNavigator();
 // let apiData= new{ FormData();
@@ -13,22 +16,24 @@ const Stack = createStackNavigator();
 //  }
  
 
-export default function ({isLogin}) {
-    
+export default function () {
+    const userDataContext = useContext(userContext);
   return (
     
     <NavigationContainer>
       <Stack.Navigator>
-          {!isLogin?<>
+          {/* {isLogin?<>
             {MainStack()}
             {AuthStack()}
          
           </>:<>
           {AuthStack()}
           {MainStack()}
-          </>}
+          </>} */}
        {/* {!isLogin && AuthStack()}
        {MainStack()} */}
+
+       {userDataContext.isLogin?<>{MainStack()}</>:<>{AuthStack()}</>}
       </Stack.Navigator>
     </NavigationContainer>
   );
