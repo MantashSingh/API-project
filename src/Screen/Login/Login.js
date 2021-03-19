@@ -8,7 +8,8 @@ import { showMessage, hideMessage } from "react-native-flash-message";
 import validations from "../../utils/validations";
 import apis from "../../apis";
 import { userContext } from '../../context/context';
-
+import GoButton from '../../Component/GoButton';
+import Footer from '../../Component/Footer';
 
 export default class Login extends Component {
   constructor(props) {
@@ -119,20 +120,20 @@ checkData = () => {
         <View style={{ flexDirection: "row", }}>
                     <Text style={styles.alreadyRegister}>Don't have account? </Text>
                     <Text style={styles.signup} onPress={()=>this.props.navigation.navigate("Signup")} >Sign up</Text>
-                    <TouchableOpacity style={styles.goTouch} onPress={()=>this.checkData()}>
-                        <Image source={imagePath.go}
-                            style={styles.goIcon} />
-                    </TouchableOpacity>
+                  
+
+                    <GoButton onPress={() => this.checkData()} style={styles.goTouch}/>
                 </View>
 
-                <View style={styles.footer}>
+                {/* <View style={styles.footer}>
                     <Text>By Signing up you agree to our</Text>
                     <View style={{ flexDirection: "row", }}>
                         <Text style={styles.tAndc}>Terms of service</Text>
                         <Text> and </Text>
                         <Text style={styles.tAndc}>Privacy policy</Text>
                     </View>
-                </View>
+                </View> */}
+                <Footer diffrentText={"Logging In"}/>
 
                 
                     <Loader isvalid={isvalid} />
@@ -177,13 +178,7 @@ const styles= StyleSheet.create({
         padding: 20,
         marginTop: 25
     },
-    tAndc: {
-        color: "blue",
-    },
-    footer: {
-        marginTop: 20,
-        alignItems: "center"
-    },
+   
     goIcon: {
         width: 25,
         height: 25,

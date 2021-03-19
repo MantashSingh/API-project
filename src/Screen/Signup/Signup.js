@@ -13,6 +13,8 @@ import validations from "../../utils/validations";
 import apis from "../../apis";
 import Loader from "../../Component/Loader";
 import navigationStrings from "../../constants/navigationStrings";
+import GoButton from "../../Component/GoButton"
+import Footer from "../../Component/Footer";
 // import { userContext } from "../../context/context";
 
 
@@ -209,20 +211,12 @@ export default class Signup extends Component {
                 <View style={{ flexDirection: "row", }}>
                     <Text style={styles.alreadyRegister}>Already Register? </Text>
                     <Text style={styles.login} onPress={()=>this.props.navigation.navigate("Login")} >Login</Text>
-                    <TouchableOpacity style={styles.goTouch} onPress={() => this.checkData()}>
-                        <Image source={imagePath.go}
-                            style={styles.goIcon} />
-                    </TouchableOpacity>
+                   
+                    <GoButton onPress={() => this.checkData()} style={styles.goTouch}/>
                 </View>
 
-                <View style={styles.footer}>
-                    <Text>By Signing up you agree to our</Text>
-                    <View style={{ flexDirection: "row", }}>
-                        <Text style={styles.tAndc}>Terms of service</Text>
-                        <Text> and </Text>
-                        <Text style={styles.tAndc}>Privacy policy</Text>
-                    </View>
-                </View>
+               
+                <Footer diffrentText={"Signing up"}/>
 
                 
                     <Loader isvalid={isvalid} />
@@ -267,12 +261,12 @@ const styles = StyleSheet.create({
         marginRight: "auto",
         marginTop: 5
     },
-    goIcon: {
-        width: 25,
-        height: 25,
+    // goIcon: {
+    //     width: 25,
+    //     height: 25,
 
 
-    },
+    // },
     alreadyRegister: {
         marginLeft: 50,
         marginTop: 50
@@ -289,11 +283,5 @@ const styles = StyleSheet.create({
         padding: 20,
         marginTop: 25
     },
-    tAndc: {
-        color: "blue",
-    },
-    footer: {
-        marginTop: 20,
-        alignItems: "center"
-    }
+   
 })

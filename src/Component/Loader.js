@@ -1,4 +1,4 @@
-import { regexp } from "is_js";
+
 import React, { Component } from "react";
 import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
 export default function Loader({isvalid}) {
